@@ -1,25 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import Home from './Components/Home/Home';
+import Header from './Components/Header/Header';
+import Shipment from './Components/Shipment/Shipment';
+import { createContext, useState } from 'react';
+import AnotherButton from './Components/AnotherButton/AnotherButton';
+
+export const ProductContext = createContext();
+
 
 function App() {
+  const [catalog, setCatalog] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <ProductContext.Provider value={[catalog, setCatalog]}>
+        <p>this is value: {catalog}</p>
+        <Header></Header>
+        <Home></Home> 
+       <Shipment count = {catalog} setCount={setCatalog}></Shipment> {/* props die data shipment a pathano hoise  */}
+       <AnotherButton></AnotherButton>
+        </ProductContext.Provider>
+       
   );
 }
+
 
 export default App;
